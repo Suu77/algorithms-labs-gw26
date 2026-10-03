@@ -369,8 +369,8 @@ the total number of key comparisons.
 
 | Tree | Search path to key `7` | Total comparisons |
 |---|---|---|
-| Degenerate BST |  |  |
-| Balanced BST |  |  |
+| Degenerate BST | `[1, 2, 3, 4, 5, 6, 7]` | 7 |
+| Balanced BST | `[4, 6, 7]` | 3 |
 
 ---
 
