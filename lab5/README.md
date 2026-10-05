@@ -140,28 +140,46 @@ Start with this AVL tree:
 ```
 (All nodes balanced: 30 has BF=1, 20 has BF=1, others BF=0.)
 
-1. Perform BST deletion of 10 (it's a leaf). What is the tree after deletion?
-
-    Ans:the tree becomes only `[20, 30]` after deletion of 10.
-
-2. Rebalance from the parent of the deleted node (20).
-3. What is the balance factor at 20?
-
-    Ans: BF(20) = -1
-**TODO 2.1:** Delete key `40` from this tree. Trace the rebalancing:
-
 1. Perform BST deletion of 40 (it's a leaf). What is the tree after deletion?
+
+    Ans: 
+    ```
+         30
+        / 
+      20    
+      /
+     10
+    ```
 2. Rebalance from the parent of the deleted node (30).
+
+    Ans: 
+    ```
+        20
+        / \
+      10    30
+    ```
 3. What is the balance factor at 30?
+
+    Ans: BF(30) = 0
 4. Identify the violation signature (LL, RR, LR, or RL) and the required rotation.
+
+    Ans: LL
 5. After rotation, is the tree still imbalanced? If so, continue rebalancing.
+
+    Ans: It is balanced with BF(20) = 0
 6. Draw the final tree and record the in-order traversal.
 
+    Ans: 
+    ```
+        20
+        / \
+      10    30
+    ```
 | Step | Action | Tree state | Unbalanced node | BF | Signature | Rotation | Notes |
 |---|---|---|---|---|---|---|---|
 | 1 | Delete 40 | 40 is removed (leaf) | - | - | - | - | Tree now has 30 root, 20 left, nothing right |
-| 2 | Rebalance from 30 | TODO | TODO | TODO | TODO | TODO | TODO |
-| 3 | After rotation | TODO | TODO | TODO | - | - | Final state |
+| 2 | Rebalance from 30 | Tree is rotated right | 30 | +2 | LL | Right | Tree now has 20 root, 10 left, 30 right |
+| 3 | After rotation | Tree is balanced | - | 0 | - | - | Tree now has 20 root, 10 left, 30 right |
 
 ### 2.2 Trace: Double rotation after deletion
 
@@ -178,15 +196,44 @@ Start with this AVL tree:
 **TODO 2.2:** Delete key `40` from this tree. Trace the rebalancing:
 
 1. Perform BST deletion of 40 (it's a leaf).
+
+    Ans:
+    ```
+      30
+     /  
+   10    
+     \
+     20
+    ```
 2. Rebalance from the parent of the deleted node (30).
+
+    Ans: 
+    ```
+        20
+        / \
+      10    30
+    ```
 3. What is the balance factor at 30 after 40 is deleted?
+
+    Ans: BF(30) = +2
 4. Identify the violation signature. Is node 10 left-heavy or right-heavy?
+
+    Ans: LR, 10 is right heavy.
 5. Which rotation(s) are needed (single or double)?
+
+    Ans: Double, left and then right.
 6. Draw the final tree and record the in-order traversal.
+
+    Ans: 
+    ```
+        20
+        / \
+      10    30
+    ```
 
 | Step | Action | Current node | BF before | Signature | Rotation applied | BF after |
 |---|---|---|---|---|---|---|
-| 1 | Delete 40 | 30 | TODO | TODO | TODO | TODO |
+| 1 | Delete 40 | 30 | +2 | LR | Left and then Right | 0 |
 | 2 | Verify final | - | - | - | - | - |
 
 ### 2.3 Trace: Two-child deletion with rebalancing
@@ -207,15 +254,41 @@ Start with this AVL tree:
 Trace the rebalancing:
 
 1. Find the in-order successor of 30 (minimum of right subtree: 40).
+
+    Ans: 
+    ```
+            50
+           /  \
+          40  70
+         /      \
+       20        80
+       /
+      10
+    ```
 2. Perform the transplant: replace 30 with 40, move 40's children appropriately.
+
+    Ans: 
 3. Rebalance from the appropriate starting node (the parent of where 40 was removed).
+
+    Ans:
+    ```
+            50
+           /  \
+          20  70
+         /  \   \
+       10   40   80
+    ```
 4. At each step, identify any violation and apply the necessary rotation.
+
+    Ans: LL violation at 40, rotate right. 
 5. Continue until no more imbalances exist.
+
+    Ans: already balanced.
 
 | Step | Current node | BF | Imbalanced? | Violation | Rotation applied |
 |---|---|---|---|---|---|
-| 1 | (after replacing 30 with 40) | TODO | TODO | TODO | TODO |
-| 2 | (if needed, continue up) | TODO | TODO | TODO | TODO |
+| 1 | (after replacing 30 with 40) | +2 at 40 | Yes | LL | Right |
+| 2 | (if needed, continue up) | 0 | No | - | - |
 
 ---
 
@@ -265,8 +338,16 @@ measuring the number of rotations triggered by each operation.
 
 1. Why can a single deletion trigger multiple rotations at different ancestors,
    whereas a single insertion triggers at most one rotation?
+
+   Ans: Becuase deletion affects the heights of the parents and grandparents that is dependent on the deleted node, thus multiple rotations are needed at different ancestors according if the BF is imbalanced whereas a single insertion end up at the leaf, which might cause an imbalance at the lowest level and might need to be rotated once. 
+
 2. What property of rotations ensures that insertion stops after one fix?
+
+    Ans: The height calculation of the BF. 
+
 3. Does a deletion ever need to rebalance higher than the root? Explain.
+
+    Ans: Nope, not higher than the root as root is the ancestor of all the children.
 
 ### 4.2 Short answer: Real-world implications
 
@@ -274,8 +355,13 @@ measuring the number of rotations triggered by each operation.
 in an AVL tree (e.g., a priority queue or cache).
 
 1. Based on the rotation cost, would you expect insertions or deletions to be slower?
+
+    Ans: Yes. 
+
 2. If deletions become a bottleneck, what alternative data structure (from this course)
    might handle deletions more efficiently?
+
+   Ans: Red-Black Tree. 
 
 ---
 
