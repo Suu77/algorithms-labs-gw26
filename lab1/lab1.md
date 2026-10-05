@@ -12,11 +12,11 @@ The Fibonacci sequence is a sequence of numbers where:
 
 ```
 TODO: Answer the following questions:
-fibonacci(5) = 
-fibonacci(6) = 
-fibonacci(7) = 
-fibonacci(8) = 
-fibonacci(9) = 
+fibonacci(5) = fibonacci(4) + fibonacci(3) = 3 + 2 = 5
+fibonacci(6) = fibonacci(5) + fibonacci(4) = 5 + 3 = 8
+fibonacci(7) = fibonacci(6) + fibonacci(5) = 8 + 5 = 13
+fibonacci(8) = fibonacci(7) + fibonacci(6) = 13 + 8 = 21
+fibonacci(9) = fibonacci(8) + fibonacci(7) = 21 + 13 = 34
 ```
 
 ## Basic implementation
