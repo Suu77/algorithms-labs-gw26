@@ -84,9 +84,9 @@ occurs. Record where $j$ stops and whether you add $s$ to the results.
 | Shift `s` | Text indices checked | Final `j` | Append `s`? |
 |---|---|---|---|
 | 1 | `1` | 0 | No |
-| 2 | TODO | TODO | TODO |
-| 4 | TODO | TODO | TODO |
-| 5 | TODO | TODO | TODO |
+| 2 | `2, 3` | 1 | No |
+| 4 | `4, 5` | 1 | No |
+| 5 | `5, 6, 7` | 3 | Yes |
 
 ### 1.2 Implementation
 
@@ -174,9 +174,14 @@ At shift `6`, the hash is `7`; all five characters match, so record `6`.
 1. **Move from shift `6` to `7`.** Which digit leaves the window, and which
    digit enters? Substitute them into the rolling-hash formula and calculate
    the new hash.
+
+   Ans: 3 leaves, and 2 enters, new hash is 8. 
+
 2. **Check shift `12`.** Its hash is `7`, so compare the characters. List the
    text and pattern indices checked before stopping. Is this a match or a
    spurious hit?
+
+   Ans: It is a spurious hit since the string 3 != 6 in comparison even though the hash are equal.
 
 ### 2.2 Implementation
 
@@ -203,8 +208,8 @@ hash comparisons and character checks.
 
 | Case | Build hashes | Search | Total |
 |---|---|---|---|
-| Best | TODO | TODO | TODO |
-| Worst | TODO | TODO | TODO |
+| Best | O(m) | O(n - m + 1) | O(n) |
+| Worst | O(m) | O((n - m + 1)m) | O((n - m + 1)m) |
 
 For each case, explain in one sentence how many windows need character checks
 and how many characters are checked in each one.
@@ -301,8 +306,8 @@ The first row is worked: `P[2] == P[4]`, so `k` increases to `3`.
 | Index `j` | Starting `k` | Fallbacks | `pi[j]` |
 |---|---|---|---|
 | 4 | 2 | none | 3 |
-| 5 | 3 | TODO | TODO |
-| 6 | 0 | TODO | TODO |
+| 5 | 3 | 3 -> 1 -> 0 | 0 |
+| 6 | 0 | none | 1 |
 
 Now trace the matcher at `i = 8`, starting with `q = 6`. Which pattern index
 is compared with `T[8]`? What shift is recorded, and what is `q` afterward?
@@ -330,12 +335,14 @@ Give tight bounds in terms of $n$ and $m$.
 
 | Case | Build `pi` | Search | Total |
 |---|---|---|---|
-| Best | TODO | TODO | TODO |
-| Worst | TODO | TODO | TODO |
+| Best | O(m) | O(n) | O(n + m) |
+| Worst | O(m) | O(n) | O(n + m) |
 
 Explain the worst-case bound in a few lines. Across the whole scan, how often
 can `q` increase? How does that limit the number of fallbacks? Use the same
 reasoning for `k` when building `pi`.
+
+Ans: ven with long partial matches and repeated fallbacks, KMP remains linear. During the search, q can increase at most once for each of the n text characters. Every fallback decreases q, so the total number of fallbacks is also (O(n)). Similarly, while building pi, k increases at most (m-1) times, which limits its total fallbacks to (O(m)).
 
 ---
 
