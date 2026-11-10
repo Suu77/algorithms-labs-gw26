@@ -18,11 +18,11 @@ This lab covers the graph representations and traversals from lecture:
 
 ## Files and deliverables
 
-| File | Your work |
-|---|---|
-| `README.md` | Complete two short traces and the analysis questions |
-| `graph_traversals.py` | Complete `bfs`, `reconstruct_path`, and `dfs` |
-| `lab_checks.py` | Provided automated checks; do not edit |
+| File                  | Your work                                            |
+| --------------------- | ---------------------------------------------------- |
+| `README.md`           | Complete two short traces and the analysis questions |
+| `graph_traversals.py` | Complete `bfs`, `reconstruct_path`, and `dfs`        |
+| `lab_checks.py`       | Provided automated checks; do not edit               |
 
 - [ ] Part 2: Trace BFS, implement it, and reconstruct a path.
 - [ ] Part 3: Trace and implement DFS, then compare traversal costs.
@@ -120,14 +120,16 @@ import: `append(v)` adds to the back and `popleft()` removes from the front.
 has had all its neighbors checked, with the front on the left. List only
 newly assigned parents.
 
-| Vertex removed | Queue afterward | New parent assignments |
-|---|---|---|
-| 0 | `[1, 2]` | `parent[1] = 0`, `parent[2] = 0` |
-| 1 | TODO | TODO |
-| 2 | TODO | TODO |
-| 3 | TODO | TODO |
+| Vertex removed | Queue afterward | New parent assignments           |
+| -------------- | --------------- | -------------------------------- |
+| 0              | `[1, 2]`        | `parent[1] = 0`, `parent[2] = 0` |
+| 1              | `[2, 3, 4]`     | `parent[3] = 1`, `parent[4] = 1` |
+| 2              | `[3, 4]`        | -                                |
+| 3              | `[4]`           | -                                |
 
 Why does processing `2` leave `parent[4]` unchanged? Answer in one sentence.
+
+Ans: Because it already discovered from vertex 1, and it doesn't update the already visited vertex parent.
 
 ### 2.2 Implementation
 
@@ -172,11 +174,11 @@ where to return.
 
 The lecture uses three colors:
 
-| Color | Meaning |
-|---|---|
-| WHITE | Not yet discovered |
-| GRAY | Discovered; its recursive call is still active |
-| BLACK | Finished checking its neighbors |
+| Color | Meaning                                        |
+| ----- | ---------------------------------------------- |
+| WHITE | Not yet discovered                             |
+| GRAY  | Discovered; its recursive call is still active |
+| BLACK | Finished checking its neighbors                |
 
 DFS also records two times for each vertex: `discovered[u]` when it turns
 GRAY and `finished[u]` when it turns BLACK. One shared counter increases at
@@ -223,11 +225,11 @@ Complete the selected vertices below. Keep the same clock when moving to
 vertex `5`.
 
 | Vertex | Parent | Discovery time | Finishing time |
-|---|---|---|---|
-| 0 | `None` | 1 | 10 |
-| 3 | TODO | TODO | TODO |
-| 4 | TODO | TODO | TODO |
-| 5 | TODO | TODO | TODO |
+| ------ | ------ | -------------- | -------------- |
+| 0      | `None` | 1              | 10             |
+| 3      | 1      | 3              | 8              |
+| 4      | 3      | 4              | 7              |
+| 5      | `None` | 11             | 12             |
 
 ### 3.2 Implementation
 
@@ -246,11 +248,11 @@ Complete the table with tight bounds. Assume an undirected, connected graph
 so BFS from one source reaches every vertex. For the matrix version, finding
 a vertex's neighbors requires scanning its entire row.
 
-| Cost | Adjacency list | Adjacency matrix |
-|---|---|---|
-| Store the graph | TODO | TODO |
-| Run BFS | TODO | TODO |
-| Run DFS | TODO | TODO |
+| Cost            | Adjacency list | Adjacency matrix |
+| --------------- | -------------- | ---------------- |
+| Store the graph | TODO           | TODO             |
+| Run BFS         | TODO           | TODO             |
+| Run DFS         | TODO           | TODO             |
 
 In a few sentences, explain how many neighbor entries each traversal checks
 with each representation. Why does a sparse graph benefit from adjacency lists?
