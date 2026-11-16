@@ -117,15 +117,17 @@ using its two endpoint labels.
 
 | Vertex removed | Edge added | `key[D]` | `key[E]` |
 |---|---|---|---|
-| `B` | TODO | TODO | TODO |
-| `C` | TODO | TODO | TODO |
-| `D` | TODO | TODO | TODO |
+| `B` | A -- B | 4 | None |
+| `C` | B -- C | 4 | 6 |
+| `D` | B -- D | 4 | 6 |
 
 1. Which vertex becomes `C`'s parent, and what causes the change? 
 
+    Ans: `B` becomes `C` parents because B -- D is 6.
 
 2. After removing `E`, what are the tree's four edges and total weight? 
 
+    Ans: A -- B, B -- C, B -- D, D -- E and the total weight is 13.
 
 
 ### 1.2 Implementation
@@ -199,10 +201,10 @@ after each check, including checks that leave them unchanged.
 
 | Edge checked | Candidate | Distance of `v` | Parent of `v` |
 |---|---|---|---|
-| `B -> C` | TODO | TODO | TODO |
-| `C -> D` | TODO | TODO | TODO |
-| `C -> E` | TODO | TODO | TODO |
-| `D -> E` | TODO | TODO | TODO |
+| `B -> C` | 3 | 3 | `A` |
+| `C -> D` | 8 | 6 | `B` |
+| `C -> E` | 8 | 6 | `B` |
+| `D -> E` | 15 | 13 | `B` |
 
 Give the final distance array and the shortest path from `A` to `E`:
 
