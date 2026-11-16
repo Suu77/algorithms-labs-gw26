@@ -203,8 +203,8 @@ after each check, including checks that leave them unchanged.
 |---|---|---|---|
 | `B -> C` | 3 | 3 | `A` |
 | `C -> D` | 8 | 6 | `B` |
-| `C -> E` | 8 | 6 | `B` |
-| `D -> E` | 15 | 13 | `B` |
+| `C -> E` | 9 | 9 | `C` |
+| `D -> E` | 13 | 9 | `C` |
 
 Give the final distance array and the shortest path from `A` to `E`:
 
